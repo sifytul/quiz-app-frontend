@@ -1,0 +1,74 @@
+header {
+  height: 4rem;
+  width: full;
+  display: flex;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  justify-content: space-between;
+  align-items: center;
+  color: darkgoldenrod;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  ;
+}
+.header__logoText {
+  margin: 2rem;
+  padding: 1rem;
+  font-size: larger;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.header__auth {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  font-weight: bold;
+  font-size: large;
+}
+.header__auth div {
+  cursor: pointer;
+}
+
+/* Single Question Card  */
+.card {
+  height: 300px;
+  width: 400px;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  cursor: pointer;
+}
+.card:hover {
+  transform: translate();
+}
+.card__img img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+.card__title {
+  margin:0 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+.card__footer {
+  font-size: 0.9rem;
+  font-weight: lighter;
+  display: flex;
+  margin: 0 1rem;
+  justify-content: space-between;
+}
+
+/* Card List */
+
+.questionCardsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
