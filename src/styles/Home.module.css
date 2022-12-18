@@ -10,7 +10,6 @@ header {
   position: sticky;
   top: 0;
   z-index: 10;
-  ;
 }
 .header__logoText {
   margin: 2rem;
@@ -51,7 +50,7 @@ header {
   object-fit: cover;
 }
 .card__title {
-  margin:0 1rem;
+  margin: 0 1rem;
   font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 0.1rem;
@@ -69,6 +68,7 @@ header {
 .questionCardsList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 0.5rem;
+  margin: 2rem auto;
+  max-width: 1200px;
 }

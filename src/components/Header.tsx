@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "../styles/Home.module.css";
 type Props = {};
 

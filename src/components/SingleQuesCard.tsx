@@ -1,22 +1,23 @@
-import styles from "../styles/Home.module.css"
-type Props = {};
+import styles from "../styles/Home.module.css";
+import { Quiz } from "./QuestionCard";
+interface Props {
+  props: Quiz;
+}
 
-const SingleQuesCard = (props: Props) => {
+const SingleQuesCard = ({ props }: Props) => {
+  const { id, image, title, questionList } = props;
   return (
     <div className={styles.card}>
       <div className={styles.card__img}>
-        <img
-          src="https://thumbs.dreamstime.com/b/ready-quiz-written-notebook-marker-pen-glasses-wooden-desk-business-concept-ready-quiz-118902066.jpg"
-          alt="quiz_banner"
-        />
+        <img src={image} alt="quiz_banner" />
       </div>
       <p className={styles.card__title}>
-        <span>#1</span>What is React and How it works - React Tutorial Bangla
-        Series
+        <span>#{id}. </span>
+        {title}
       </p>
       <div className={styles.card__footer}>
-        <p>4 Questions</p>
-        <p>Total points: 20</p>
+        <p>{questionList.length} Questions</p>
+        <p>Total points: {questionList.length * 5}</p>
       </div>
     </div>
   );

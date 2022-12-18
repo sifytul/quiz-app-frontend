@@ -1,17 +1,21 @@
-import { Outlet } from "react-router-dom";
-import Header from '../components/Header'
-import QuestionCardList from '../components/QuestionCard'
+import { useState } from "react";
+import QuestionCardList from "../components/QuestionCard";
+import { Quiz } from "../components/QuestionCard";
 
-type Props = {}
-
-const Home = (props: Props) => {
-  return (
-    <div>
-      {/* <Header/> */}
-      <QuestionCardList />
-      {/* <Outlet /> */}
-    </div>
-  );
+interface Props{
+  quizes: Quiz[]
 }
 
-export default Home
+
+const Home = ({quizes}: Props) => {
+  
+
+  const [questionList, setQuestionList] = useState<Quiz[]>([...quizes]);
+  return (
+    <div>
+      <QuestionCardList props={questionList} />
+    </div>
+  );
+};
+
+export default Home;
