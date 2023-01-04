@@ -1,19 +1,18 @@
 import { useState } from "react";
 import QuestionCardList from "../components/QuestionCard";
-import { Quiz } from "../components/QuestionCard";
+import { topicListType } from "../assets/typesContainer";
 
-interface Props{
-  quizes: Quiz[]
+interface Props {
+  topicList: topicListType[];
 }
 
 
-const Home = ({quizes}: Props) => {
+const Home = ({topicList}: Props) => {
   
 
-  const [questionList, setQuestionList] = useState<Quiz[]>([...quizes]);
   return (
     <div>
-      <QuestionCardList props={questionList} />
+      <QuestionCardList quizTopics={topicList} />
     </div>
   );
 };

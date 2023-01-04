@@ -1,7 +1,9 @@
 .question {
+  /* border: 1px solid rgb(226, 88, 88); */
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 .question__options {
   display: grid;
@@ -18,16 +20,9 @@
   align-items: center;
   border-radius: 3px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-}
-
-.question__singleOption label {
   padding: 1rem;
   font-size: large;
-}
-.question__singleOption span {
-  margin: 0 0.7rem;
-}
-.question__singleOption input {
+  gap: 1rem;
   cursor: pointer;
 }
 
@@ -36,6 +31,19 @@
   bottom: 0;
 }
 
+.submit__btn {
+  display: flex;
+    justify-content: end;
+}
+.submit__btn button {
+    margin: 1rem;
+    height: 2.5rem;
+    width: 6rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
 /* progress bar component */
 .progressBar {
   width: calc(100vw - 100px);

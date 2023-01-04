@@ -1,24 +1,33 @@
+import { quizListType } from "../assets/typesContainer";
 import styles from "../styles/Question.module.css";
-import { QuestionPropsTypes } from "./QuestionCard";
 interface Props {
-  quiz: QuestionPropsTypes;
+  quiz: quizListType[];
+  answerHandler: (e: any, quesId: any, optionId: any) => void;
 }
 
-const Question = ({ quiz }: Props) => {
+const Question = ({ quiz, answerHandler }: Props) => {
+  // console.log(quiz)
   return (
     <>
-      {quiz?.questionList.map((item) => (
-        <div key={item.questionId} className={styles.question}>
+      {quiz.map((item, quesIndex) => (
+        <div key={quesIndex} className={styles.question}>
           <div className={styles.question__title}>
             <h2>
-              <span>#{item.questionId} </span>
-              {item.questionTitle}
+              <span>#{quesIndex + 1} </span>
+              {item.title}
             </h2>
             <p>Question can have multiple answers</p>
           </div>
           <div className={styles.question__options}>
-            {item.options.map((option, index) => (
-              <Option key={index} option={option} />
+            {item.options.map((option, optionIndex) => (
+              <Option
+                key={optionIndex}
+                text={option.title}
+                className={styles.question__singleOption}
+                value={optionIndex}
+                checked={option.checked}
+                onChange={e=> answerHandler(e, quesIndex, optionIndex)}
+              />
             ))}
           </div>
 
@@ -47,15 +56,19 @@ const Question = ({ quiz }: Props) => {
 export default Question;
 
 interface optionType {
-  option: string;
+  text: string;
+  className: string;
+  value: number;
+  checked: boolean;
+  onChange: (e, quesId, optionId) => void
 }
-const Option = ({ option }: optionType) => {
+const Option = ({ className, text, ...rest }: any) => {
   return (
-    <div className={styles.question__singleOption}>
-      <label>
-        <input type="checkbox" name="fruit[]" value="grapes" />
-        <span>{option}</span>
+    <>
+      <label className={className}>
+        <input type="checkbox" {...rest} />
+        <span>{text}</span>
       </label>
-    </div>
+    </>
   );
 };
