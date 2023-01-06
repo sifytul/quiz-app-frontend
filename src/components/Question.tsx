@@ -1,11 +1,12 @@
 import { ChangeEvent } from "react";
 import { quizListType } from "../assets/typesContainer";
 import styles from "../styles/Question.module.css";
+import Option from "./UI/Option";
 
 interface PropsType {
   quiz: quizListType;
   quesIndex?: number;
-  answerHandler?: (e: any, quesId: any, optionId: any) => void;
+  answerHandler?: (e: ChangeEvent<HTMLInputElement>, quesId: number, optionId: number) => void;
 }
 
 const Question = ({ quiz, quesIndex, answerHandler }: PropsType) => {
@@ -22,20 +23,17 @@ const Question = ({ quiz, quesIndex, answerHandler }: PropsType) => {
           </p>
         </div>
         <div className={styles.question__options}>
-          {quiz.options.map((option, optionIndex) => 
-          
-          
-          (
-            <Option
-              key={optionIndex}
-              text={option.title}
-              className={styles.question__singleOption}
-              value={optionIndex}
-              checked={option.checked}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                answerHandler?.(e, quesIndex, optionIndex)
-              }
-            />
+          {quiz.options.map((option, optionIndex) => (
+              <Option
+                key={optionIndex}
+                text={option.title}
+                className={styles.question__singleOption}
+                value={optionIndex}
+                checked={option.checked}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  answerHandler?.(e, quesIndex!, optionIndex)
+                }
+              />
           ))}
         </div>
       </div>
@@ -44,21 +42,3 @@ const Question = ({ quiz, quesIndex, answerHandler }: PropsType) => {
 };
 
 export default Question;
-
-interface optionType {
-  text: string;
-  className: string;
-  value: number;
-  checked: boolean;
-  onChange: (e: ChangeEvent<HTMLInputElement>, quesId:number, optionId:number) => void;
-}
-export const Option = ({ className, text, ...rest }: any) => {
-  return (
-    <>
-      <label className={className}>
-        <input type="checkbox" {...rest} />
-        <span>{text}</span>
-      </label>
-    </>
-  );
-};

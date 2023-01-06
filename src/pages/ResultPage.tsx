@@ -1,17 +1,14 @@
 import _ from "lodash";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { answers } from "../assets/data";
 import styles2 from "../styles/Question.module.css";
 import styles from "../styles/ResultPage.module.css";
 
-import { BiX } from "react-icons/bi";
 import { ImCross } from "react-icons/im";
 import { TiTick } from "react-icons/ti";
+import Option from "../components/UI/Option";
 
-interface Props {
-  quiz: any;
-}
 interface singleQuizListTypes {
   title: string;
   options: {
@@ -120,6 +117,7 @@ const ResultPage = () => {
                           key={optionIndex}
                           text={option.title}
                           className={styles2.question__singleOption}
+                          input={false}
                           right={
                             option.checked
                               ? option.correct
@@ -142,29 +140,3 @@ const ResultPage = () => {
 };
 
 export default ResultPage;
-
-interface optionType {
-  text: string;
-  className: string;
-  value: number;
-  checked: boolean;
-  onChange: (
-    e: ChangeEvent<HTMLInputElement>,
-    quesId: number,
-    optionId: number
-  ) => void;
-}
-export const Option = ({ className, text, right }: any) => {
-  return (
-    <>
-      <label className={className}>
-        {right === "not-checked" ? null : right ? (
-          <TiTick style={{ color: "lightgreen" }} />
-        ) : (
-          <BiX style={{ color: "red" }} />
-        )}
-        <span>{text}</span>
-      </label>
-    </>
-  );
-};

@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { ChangeEvent, useEffect, useReducer, useState } from "react";
+import { ChangeEvent, Fragment, useEffect, useReducer, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { quiz } from "../assets/data";
 import Question from "../components/Question";
@@ -57,12 +57,12 @@ const Questions = () => {
 
     const answerHandler = (
       e: ChangeEvent<HTMLInputElement>,
-      quesId: number,
+      questionId: number,
       optionId: number
     ) => {
       dispatch({
         type: "answers",
-        questionId: quesId,
+        questionId: questionId,
         optionId: optionId,
         payload: e.target.checked,
       });
@@ -70,15 +70,24 @@ const Questions = () => {
     const answeredArr = Object.values(qna.answerCount);
     const Answered = !answeredArr.includes(0);
     const allAnswered = answeredArr.length === noq && Answered;
+    if (qna === null) {
+      return <div>Something Went wrong!!!</div>;
+    }
     return (
       <>
         {loading && <div>Loading...</div>}
+
         {!loading && qna.quiz && qna.quiz.length > 0 && (
-          <>
+          <Fragment>
             <h2 className={styles.topic__title}>{topicTitle}</h2>
 
             {qna.quiz.map((item, quesIndex) => (
-              <Question quiz={item} answerHandler={answerHandler} quesIndex={quesIndex}/>
+              <Question
+                key={quesIndex}
+                quiz={item}
+                answerHandler={answerHandler}
+                quesIndex={quesIndex}
+              />
             ))}
 
             <div className={styles.submit__btn}>
@@ -89,7 +98,7 @@ const Questions = () => {
                 <button disabled={!allAnswered}>Submit</button>
               </Link>
             </div>
-          </>
+          </Fragment>
         )}
       </>
     );

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { topicListType } from "../src/assets/typesContainer";
 import "./App.css";
-import { quiz, topic } from "./assets/data";
+import { topic } from "./assets/data";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
@@ -15,7 +15,6 @@ let topicList: topicListType[] = Object.keys(topic).reduce((acc, curr) => {
   acc.push(topic[curr]);
   return acc;
 }, []);
-
 
 function App() {
   return (
