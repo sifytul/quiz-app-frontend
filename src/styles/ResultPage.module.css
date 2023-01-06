@@ -7,3 +7,22 @@
     border: none;
     cursor: pointer;
 }
+
+.Score__section {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+}
+.score__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.score__left :nth-child(1) {
+    font-size: 2rem;
+}
+.score__right__img img{
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+}

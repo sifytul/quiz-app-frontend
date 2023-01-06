@@ -1,3 +1,10 @@
+.topic__title{
+  text-align: center;
+  /* font-size: larger; */
+  font-weight: bold;
+  padding: 2rem;
+}
+
 .question {
   /* border: 1px solid rgb(226, 88, 88); */
   max-width: 600px;
@@ -33,7 +40,7 @@
 
 .submit__btn {
   display: flex;
-    justify-content: end;
+  justify-content: flex-end;
 }
 .submit__btn button {
     margin: 1rem;
@@ -44,7 +51,7 @@
     border: none;
     cursor: pointer;
 }
-/* progress bar component */
+/* progress bar component
 .progressBar {
   width: calc(100vw - 100px);
   height: 65px;
@@ -156,7 +163,7 @@
   left: 50%;
   position: absolute;
   transform: rotate(45deg) translate(-50%, 100%);
-}
+} */
 
 /* .question__footer #progressbar > div {
   background-color: orange;

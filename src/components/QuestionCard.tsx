@@ -16,7 +16,7 @@ const QuestionCardList = ({ quizTopics }: PropsType) => {
             to={{
               pathname: `/quiz/${topic.youtubeID}`,
             }}
-            state={{ videoTitle: topic.title }}
+            state={{ topicTitle: topic.title, noq: topic.noq }}
             style={{ textDecoration: "none", color: "inherit" }}
             key={topic.id}
           >

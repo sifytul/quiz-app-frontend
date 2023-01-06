@@ -1,11 +1,11 @@
 import _ from "lodash";
-import { useEffect, useReducer, useState } from "react";
+import { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { quiz } from "../assets/data";
 import Question from "../components/Question";
 import styles from "../styles/Question.module.css";
 
-const initialState = null;
+const initialState = { quiz: null, answerCount: {} };
 const reducer = (state, action) => {
   switch (action.type) {
     case "questions":
@@ -14,13 +14,22 @@ const reducer = (state, action) => {
           option.checked = false;
         });
       });
-      return action.payload;
+      return { ...state, quiz: action.payload };
 
     case "answers":
-      const clonedQuestions = _.cloneDeep(state);
+      const clonedQuestions = _.cloneDeep(state.quiz);
       clonedQuestions[action.questionId].options[action.optionId].checked =
         action.payload;
-      return clonedQuestions;
+      const newAnsCount = _.cloneDeep(state.answerCount);
+      if (action.questionId in newAnsCount && action.payload === true) {
+        newAnsCount[action.questionId] += 1;
+      } else if (action.questionId in newAnsCount && action.payload === false) {
+        newAnsCount[action.questionId] -= 1;
+      } else {
+        newAnsCount[action.questionId] = 1;
+      }
+      return { ...state, quiz: clonedQuestions, answerCount: newAnsCount };
+
     default:
       return state;
   }
@@ -33,7 +42,7 @@ const Questions = () => {
       quiz[youtubeid].questions
     );
     const { state } = useLocation();
-    const { videoTitle } = state;
+    const { topicTitle, noq } = state;
     const [loading, setLoading] = useState(true);
 
     const [qna, dispatch] = useReducer(reducer, initialState);
@@ -45,9 +54,12 @@ const Questions = () => {
       });
       setLoading(false);
     }, [singleQuizList]);
-    console.log(qna);
 
-    const answerHandler = (e, quesId, optionId) => {
+    const answerHandler = (
+      e: ChangeEvent<HTMLInputElement>,
+      quesId: number,
+      optionId: number
+    ) => {
       dispatch({
         type: "answers",
         questionId: quesId,
@@ -55,17 +67,26 @@ const Questions = () => {
         payload: e.target.checked,
       });
     };
-
+    const answeredArr = Object.values(qna.answerCount);
+    const Answered = !answeredArr.includes(0);
+    const allAnswered = answeredArr.length === noq && Answered;
     return (
       <>
         {loading && <div>Loading...</div>}
-        {!loading && qna && qna.length > 0 && (
+        {!loading && qna.quiz && qna.quiz.length > 0 && (
           <>
-            <p>{videoTitle}</p>
-            <Question quiz={qna} answerHandler={answerHandler} />
+            <h2 className={styles.topic__title}>{topicTitle}</h2>
+
+            {qna.quiz.map((item, quesIndex) => (
+              <Question quiz={item} answerHandler={answerHandler} quesIndex={quesIndex}/>
+            ))}
+
             <div className={styles.submit__btn}>
-              <Link to="/result" state={{ userSubmission: qna }}>
-                <button>Submit</button>
+              <Link
+                to={{ pathname: `/result/${youtubeid}` }}
+                state={{ userSubmission: qna.quiz }}
+              >
+                <button disabled={!allAnswered}>Submit</button>
               </Link>
             </div>
           </>

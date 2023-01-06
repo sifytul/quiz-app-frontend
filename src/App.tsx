@@ -26,7 +26,7 @@ function App() {
           <Route path="quiz/:youtubeid" element={<Questions />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="login" element={<LogIn />} />
-          <Route path="result" element={<ResultPage />} />
+          <Route path="result/:youtubeid" element={<ResultPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>

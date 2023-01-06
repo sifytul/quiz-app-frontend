@@ -9,6 +9,7 @@ export interface quizListType {
   title: string;
   options: {
     title: string;
-    checked: boolean;
+    correct?: boolean;
+    checked?: boolean;
   }[];
 }
