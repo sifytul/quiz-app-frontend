@@ -1,5 +1,5 @@
 # mcq-test-app
-A minimalistic react test app for the teaching purpose
+A minimalistic react test app for the teaching purpose using **react and typescript**.
 
 
 ### This includes a list of topics and some lorem ipsum quizes
